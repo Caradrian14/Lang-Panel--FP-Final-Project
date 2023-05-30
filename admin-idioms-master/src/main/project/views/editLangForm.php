@@ -11,7 +11,7 @@
     include_once("./src/main/project/views/layout/header.php");
     ?>
     <main>
-        <div class="flex full-screen">
+        <div class="lg:flex full-screen">
             <?php
             include_once("./src/main/project/views/layout/aside.php");
             ?>
@@ -21,8 +21,8 @@
                     <div class="flex-1"></div>
                 </div>
                 <div class="flex justify-center w-auto">
-                    <form class="mx-12 my-6 p-2 border-solid border-2 border-teal-800" action="/Controller=AdminText&method=storeLang" method="POST">
-                        <input type="hidden" name="Controller" value="AdminText">
+                    <form class="mx-12 my-6 p-2 border-solid border-2 border-teal-800" action="/Controller=front&method=storeLang" method="POST">
+                        <input type="hidden" name="Controller" value="front">
                         <input type="hidden" name="method" value="updateLang">
                         <input type="hidden" name="idLang" value="<?= $langObject->getId() ?>">
                         <div class="flex items-center text-center p-5">

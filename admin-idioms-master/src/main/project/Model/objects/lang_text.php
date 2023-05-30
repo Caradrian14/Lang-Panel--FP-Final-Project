@@ -1,6 +1,8 @@
 <?php
 include_once("./src/main/project/Model/objects/lang.php");
-
+/**
+ * Objeto Traducción, se trata de una traducción concreta de una unica etiqueta y un idioma concreto
+ */
 class Lang_text{
 
     private $text;

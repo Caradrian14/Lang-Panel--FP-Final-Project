@@ -11,18 +11,17 @@
     include_once("./src/main/project/views/layout/header.php");
     ?>
     <main>
-        <div class="flex full-screen">
+        <div class="lg:flex mt-3 full-screen">
             <?php
             include_once("./src/main/project/views/layout/aside.php");
             ?>
             <div class="flex-1 w-auto">
-                <div class="flex justify-center  mt-10 ml-12 items-center">
-                    <h1 class="m-4 text-center flex-1 text-left text-lg font-bold">Formulario para la Creación de Tag</h1>
-                    <div class="flex-1"></div>
+                <div class="mt-3 flex justify-center items-center">
+                    <h1 class="m-2 lg:m-4 text-center flex-1 text-left text-lg font-bold">Formulario para la Creación de Tag</h1>
                 </div>
                 <div class="flex justify-center w-auto">
-                    <form class="mx-12 my-6 p-2 border-solid border-2 border-teal-800" action="/Controller=AdminText&method=storeText" method="POST">
-                        <input type="hidden" name="Controller" value="AdminText">
+                    <form class="mx-12 my-6 lg:p-2 pb-2 border-solid border-2 border-teal-800" action="/Controller=front&method=storeText" method="POST">
+                        <input type="hidden" name="Controller" value="front">
                         <input type="hidden" name="method" value="storeText">
                         <div class="flex justify-center p-5">
                             <label class="p-3" for="textTag">Nombre de la Etiqueta</label>

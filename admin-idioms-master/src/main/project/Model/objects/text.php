@@ -1,6 +1,9 @@
 <?php
 include_once("./src/main/project/Model/DAO/dbConnection.php");
 include_once("./src/main/project/Model/objects/lang_text.php");
+/**
+ * Representa las etiquetas sobre las que se agruparan las traducciones, de ahi que tenga 
+ */
 class Text{
 
     private $id;
@@ -43,6 +46,9 @@ class Text{
         return $this->active;
     }
 
+    /**
+     * Añade una traducción a la etiqueta
+     */
     public function addLang_Text(Lang_text $langText)
     {
         array_push($this->lang_text, $langText);

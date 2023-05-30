@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Representa un idioma sobre el que realizar las traducciones
+ */
 class Lang{
 
     private $id;

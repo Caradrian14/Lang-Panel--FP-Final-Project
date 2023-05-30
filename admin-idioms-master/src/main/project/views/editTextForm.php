@@ -11,7 +11,7 @@
     include_once("./src/main/project/views/layout/header.php");
     ?>
     <main>
-        <div class="flex full-screen">
+        <div class="lg:flex min-h-screen">
             <?php
             include_once("./src/main/project/views/layout/aside.php");
             ?>
@@ -21,12 +21,12 @@
                     <div class="flex-1"></div>
                 </div>
                 <div class="flex justify-center w-auto">
-                    <form action="/Controller=AdminText&method=updateTextTag" class="mx-12 my-6 p-2 border-solid border-2 border-teal-800" method="POST">
-                        <input type="hidden" name="Controller" value="AdminText">
+                    <form action="/Controller=front&method=updateTextTag" class="lg:mx-12 my-6 p-1 lg:p-2 border-solid border-2 border-teal-800" method="POST">
+                        <input type="hidden" name="Controller" value="front">
                         <input type="hidden" name="method" value="updateTextTag">
                         <input type="hidden" name="id" value="<?= $text->getId() ?>">
 
-                        <div class="flex justify-center p-5">
+                        <div class="flex justify-center lg:p-5 p-3">
                             <label class="p-3" for="textTag">Nombre de la Etiqueta</label>
                             <input placeholder="Introduce el nombre del Tag" class="p-3 border-solid border-2 border-teal-500" name="textTag" type="text" value="<?= $text->getTag() ?>">
                         </div>

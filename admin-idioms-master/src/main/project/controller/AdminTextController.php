@@ -16,7 +16,7 @@ class AdminTextController
         if (isset($_GET['lang'])) {
             $tag = $_GET['lang'];
         }
-       $text = '%landing%';
+        $text = '%landing%';
         //Obtener todos los idiomas disponibles
         $arrayLangs =  $this->getAllLang();
         //obtendra las etiquetas con landing
@@ -42,7 +42,7 @@ class AdminTextController
         $arrayLangs = $this->getAllLang();
         require_once("./src/main/project/views/langList.php");
     }
-
+    
     public function searcher()
     {
         $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
@@ -58,7 +58,7 @@ class AdminTextController
         $results = $dao->searcher($searcher, $conn, $page);
         require_once("./src/main/project/views/searcherResults.php");
     }
-
+    //
     public function getAllLang()
     {
         $conn = $this->getConexion();
@@ -71,13 +71,13 @@ class AdminTextController
         }
         return $arrayLangs;
     }
-
+    //
     private function createObjectLang($rowSQL)
     {
         $lang = new Lang($rowSQL['name'], $rowSQL['tag'], $rowSQL['id']);
         return $lang;
     }
-
+    //
     private function createTextWithLang($rowSQL)
     {
         $text = new Text($rowSQL['tag'], $rowSQL['active'], $rowSQL['id']);
@@ -85,7 +85,7 @@ class AdminTextController
         $text->addLang_Text($lang_text);
         return $text;
     }
-
+    //
     private function checkTextsExists($tagRow, $arrayObjects)
     {
         foreach ($arrayObjects as $object) {
@@ -96,13 +96,13 @@ class AdminTextController
         return true;
     }
 
-
+    //
     public function createText()
     {
         $arrayLangs = $this->getAllLang();
         require_once("./src/main/project/views/createTextForm.php");
     }
-
+    //
     public function storeText()
     {
         $text = new Text($_POST['textTag'], $_POST['active']);
@@ -112,7 +112,7 @@ class AdminTextController
         $this->storeAllLang_TextByTag($_POST['textTag'], $conn);
         header('Location: /?Controller=AdminText&method=showLang_Text&tag=' . $_POST['textTag']);
     }
-
+    //
     private function storeAllLang_TextByTag($tagText, $conn)
     {
         $arrayLangs = $this->getAllLang();
@@ -120,13 +120,13 @@ class AdminTextController
             $this->storeLang_Text($tagText, $lang->getTag(), '', $conn);
         }
     }
-
+    //
     public function createLang()
     {
         $arrayLang = $this->getAllLang();
         require_once("./src/main/project/views/langForm.php");
     }
-
+    //
     public function storeLang()
     {
         $tag = $_POST['textTag'];
@@ -137,14 +137,14 @@ class AdminTextController
         $langDao->create($lang, $conn);
         header('Location: /?Controller=AdminText&method=getAll');
     }
-
+    //
     public function storeLang_Text($text, $lang, $body, $conn)
     {
         $lang_text = new Lang_text($text, $lang, $body);
         $lang_textDAO = new textLangDAO();
         $lang_textDAO->create($lang_text, $conn);
     }
-
+    //
     public function editLang()
     {
         $langTag = $_GET['tag'];
@@ -154,7 +154,7 @@ class AdminTextController
         $langObject = new Lang($langArray['name'], $langArray['tag'], $langArray['id']);
         require_once("./src/main/project/views/editLangForm.php");
     }
-
+    //
     public function editText()
     {
         $tagText = $_GET['tagText'];
@@ -164,7 +164,7 @@ class AdminTextController
         $text = new Text($sqlRow['tag'], $sqlRow['active'], $sqlRow['id']);
         require_once('./src/main/project/views/editTextForm.php');
     }
-
+    //
     public function updateLang()
     {
         $newAbreviationLang = $_POST['abreviationLang'];
@@ -199,7 +199,7 @@ class AdminTextController
         $this->updateAllLang_Text($postText_langs, $tagText, $arrayLang, $conn);
         header('Location: /?Controller=AdminText&method=showLang_Text&tag=' . $_POST['tag']);
     }
-
+    //
     public function updateAllLang_TextByTagAndRedirect()
     {
         $postText_langs = $_POST['arrayLang_Text'];
@@ -210,7 +210,7 @@ class AdminTextController
         $this->updateAllLang_Text($postText_langs, $tagText, $arrayLang, $conn);
         header('Location: /?Controller=AdminText&method=getAll');
     }
-
+    //
     private function updateAllLang_Text($postText_langs, $tagText, $arrayLang, $conn)
     {
         $arrayText_LangForUpdate = [];
@@ -227,7 +227,7 @@ class AdminTextController
             }
         }
     }
-
+    //
     public function destroyText()
     {
         $textTag = $_GET['textTag'];
@@ -236,7 +236,7 @@ class AdminTextController
         $textDAO->destroyTextBytag($textTag, $conn);
         header('Location: /?Controller=AdminText&method=getAll');
     }
-
+    //
     public function destroyLang()
     {
         $langTag = $_GET['tag'];
@@ -245,7 +245,7 @@ class AdminTextController
         $langDAO->destroy($langTag, $conn);
         header('Location: /?Controller=AdminText&method=getLangListPage');
     }
-
+    //
     public function showLang_Text()
     {
         $tagName = $_GET['tag'];
@@ -258,7 +258,7 @@ class AdminTextController
         $array = $dao->show($tagName, $conn);
         require_once("./src/main/project/views/showlang_Text.php");
     }
-
+    //
     protected function getConexion()
     {
         $conn = new dbConnection();

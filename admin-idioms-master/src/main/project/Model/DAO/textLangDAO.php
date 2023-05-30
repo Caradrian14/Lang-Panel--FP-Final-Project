@@ -10,6 +10,9 @@ class textLangDAO{
 
     private $numPage = 10;
 
+    /**
+     * Retorna un array con el resultado al buscar en la base de datos la $idText
+     */
     public function getByText($idText, $conn){
         $sql = "SELECT * FROM lang_text where lang_text.textId like ?";
         $stmt = $conn->prepare($sql);
@@ -31,11 +34,13 @@ class textLangDAO{
         $stmt->close();
         return $arrayResults;
     }
-
-    public function getLangByText($idText, $conn){
+    /**
+     * Retorna la traduccion en base de datos segun el nombre de la etiqueta $textTag
+     */
+    public function getLangByText($textTag, $conn){
         $sql = "SELECT langTag, body FROM lang_text where lang_text.textId like ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $idText);
+        $stmt->bind_param("s", $textTag);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -53,6 +58,9 @@ class textLangDAO{
         return $arrayResults;
     }
 
+    /**
+     * Crea una traducción
+     */
     public function create (Lang_text $langText ,$conn){
         $sql = "INSERT INTO lang_text (id, textId, langTag, body) values ( NULL, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
@@ -64,6 +72,9 @@ class textLangDAO{
         $stmt->close();
     }
 
+    /**
+     * Actualiza una traducción dada como objeto Lang_text $langText 
+     */
     public function updateOrInsert (Lang_text $langText ,$conn){
         $sql = "UPDATE lang_text  SET body = ? WHERE textId = ? and langTag = ?";
         $stmt = $conn->prepare($sql);
@@ -77,6 +88,9 @@ class textLangDAO{
 
     }
 
+    /**
+     * Retorna un array de arrays en base a la etiqueta ($tagTextLang) indicada.
+     */
     public function show ($tagTextLang ,$conn){
         $sql = "SELECT * FROM lang_text inner join lang on lang_text.langTag = lang.tag  WHERE lang_text.textId like ?";
         $stmt = $conn->prepare($sql);
@@ -100,6 +114,9 @@ class textLangDAO{
         
     }
 
+    /**
+     * Elimina una traducción de la base de datos
+     */
     public function destroy($tagtext, $langTag, $conn){
         $sql = "DELETE FROM lang_text where lang_text.textid like ? and lang_text.langtag like ?";
         $stmt = $conn->prepare($sql);
@@ -109,20 +126,9 @@ class textLangDAO{
         $stmt->close();
     }
 
-    public function getBodyByLangAndText($lang, $text, $conn){
-        $sql = "SELECT * FROM lang_text where lang_text.langTag like ? AND lang_text.textId like ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $lang, $text);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
-        if ($row = $result->fetch_assoc()) {
-            return $row;
-        } else {
-            return [];
-        }
-    }
-
+    /**
+     * Retorna las traducciones en formato de array en base a una string de etiqueta $text y un string de idioma $lang
+     */
     public function getBodysByLangAndText($lang, $text, $conn){
         $sql = "SELECT * FROM lang_text where lang_text.langTag like ? AND lang_text.textId like ?";
         $stmt = $conn->prepare($sql);
@@ -141,12 +147,18 @@ class textLangDAO{
         return $arrayResults;
     }
 
+    /**
+     * Crea el objeto Lang_text en base a un array y lo retorna
+     */
     public function createLangTextObject($row)
     {
         $lang_text = new Lang_text($row['textId'], $row['langTag'], $row['body'], $row['id']);
         return $lang_text;
     }
 
+    /**
+     * Obtenemos la traducción por el idioma
+     */
     public function getByLang($lang, $conn){
         $sql = "SELECT * FROM lang_text where lang_text.langTag like ?";
         $stmt = $conn->prepare($sql);
@@ -170,6 +182,9 @@ class textLangDAO{
         return $arrayResults;
     }
 
+    /**
+     * Cuenta el numero total de paginas en la busqueda de la palabra clave $keyword
+     */
     public function getCountTotalLang_Text($keywords, $conn){
         $sqlCount = "SELECT COUNT(id) FROM lang_text WHERE textId LIKE ? OR body LIKE ?";
         $stmtCount = $conn->prepare($sqlCount);
@@ -182,6 +197,9 @@ class textLangDAO{
         return $total_paginas;
     }
 
+    /**
+     * Realiza una busqueda en las traducciones y la etiqueta
+     */
     public function searcher($keywords, $conn, $actualPage = 1){
         $sql = 'SELECT * FROM lang_text WHERE textId LIKE ? OR body LIKE ? LIMIT ? OFFSET ?';
         $stmt = $conn->prepare($sql);

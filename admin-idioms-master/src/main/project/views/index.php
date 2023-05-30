@@ -3,7 +3,7 @@
 
 <head>
     <?php include_once('./src/main/project/views/layout/head.php'); ?>
-    <title>Demo de presentacion del panel</title>
+    <title>Panel de Idiomas</title>
 </head>
 
 <body>
@@ -11,20 +11,20 @@
     include_once("./src/main/project/views/layout/header.php");
     ?>
 
-    <main class="flex min-h-screen">
+    <main class="lg:flex min-h-screen">
         <?php
         include_once("./src/main/project/views/layout/aside.php");
         ?>
 
         <div class="flex-1 w-auto">
-            <div class="flex justify-center mt-10 ml-12 items-center">
+            <div class="lg:flex lg:justify-center mt-10 ml-12 items-center">
                 <div class="flex-1 flex justify-center">
                     <h1 class="text-lg font-bold text-center m-4">Listado de Tags</h1>
-                    <a class="m-4 text-sm bg-transparent border-solid border-2 border-teal-800 hover:bg-teal-800 hover:text-white text-teal-800 font-bold py-2 px-4 rounded w-40" href="/?Controller=AdminText&method=createText">Añadir Nuevo Tag</a>
+                    <a class="m-4 text-sm bg-transparent border-solid border-2 border-teal-800 hover:bg-teal-800 hover:text-white text-teal-800 font-bold py-2 px-4 rounded w-40" href="/?Controller=front&method=createText">Añadir Nuevo Tag</a>
                 </div>
 
-                <form class="flex-1" action="/Controller=AdminText&method=searcher" method="GET">
-                    <input type="hidden" name="Controller" value="AdminText">
+                <form class="lg:flex-1 flex justify-center" action="/Controller=front&method=searcher" method="GET">
+                    <input type="hidden" name="Controller" value="front">
                     <input type="hidden" name="method" value="searcher">
                     <input placeholder="Busqueda" class="bg-grey-300 border-solid border-2 border-sky-500 cursor-pointer" type="text" name="searcher" required>
                     <input class="bg-transparent border-solid border-2 border-sky-500 hover:bg-sky-500 hover:text-white text-sky-500 font-bold py-1 px-2 rounded" type="submit" value="Buscar">
@@ -34,14 +34,14 @@
             <div class="flex justify-center">
                 <ul>
                     <li class="my-3 rounded-2xl">
-                        <div class="min-w-full divide-y divide-gray-200">
-                            <table class="table-auto mx-20 align-middle	text-left">
+                        <div class="min-w-full divide-y divide-gray-200 text-xs lg:text-lg">
+                            <table class="w-full table-auto lg:table-auto align-middle text-left">
                                 <tr>
-                                    <td class="p-2 px-14 text-left w-64">
+                                    <td class="lg:p-2 lg:px-14 w-40 lg:w-52 text-center">
                                         Nombre
                                     </td>
-                                    <td class="p-2 px-20 w-16 text-center">Idiomas Dsiponibles</td>
-                                    <td class="p-2 px-12 text-right w-16">Acciones</td>
+                                    <td class="lg:p-2 lg:px-14 lg:w-16 text-center">Idiomas</td>
+                                    <td class="lg:p-2 lg:w-16 text-right">Acción</td>
                                 </tr>
                             </table>
                         </div>
@@ -49,13 +49,13 @@
                     <?php
                     foreach ($array as $object) {
                     ?>
-                        <li class='bg-sky-300 hover:bg-sky-500 ease-in-out duration-300 my-3 rounded-2xl animation-expanded'>
-                            <a href="/?Controller=AdminText&method=showLang_Text&tag=<?= key($object) ?>">
-                                <div class="min-w-full divide-y divide-gray-200">
-                                    <table class="table-auto mx-20 text-left">
+                        <li class=' p-2 lg:p-0 bg-sky-300 hover:bg-sky-500 ease-in-out duration-300 my-3 rounded-2xl'>
+                            <a href="/?Controller=front&method=showLang_Text&tag=<?= key($object) ?>">
+                                <div class="lg:min-w-full divide-y divide-gray-200">
+                                    <table class="text-xs lg:text-lg w-full table-auto lg:mx-20 text-left">
                                         <tr>
-                                            <td class="p-2 px-12 flex justify-start w-64"><?= key($object) ?></td>
-                                            <td class="p-2 px-12 w-16">
+                                            <td class="lg:p-2 lg:px-12 flex justify-start w-40 lg:w-52 inline-block align-middle"><?= key($object) ?></td>
+                                            <td class="lg:p-2 lg:px-12 lg:w-16">
                                                 <table>
                                                     <tr>
                                                         <?php
@@ -63,7 +63,7 @@
                                                         ?>
                                                             <td class='border 
                                                             border-slate-700
-                                                            p-2
+                                                            lg:p-2
                                                             <?php
                                                             $isTransleted = false;
                                                             foreach ($object[key($object)] as $tagLang) {
@@ -82,8 +82,8 @@
                                                     </tr>
                                                 </table>
                                             </td>
-                                            <td class="p-2 px-12 flex justify-end w-16">
-                                                <a class="delete" href="/?Controller=AdminText&method=destroyText&textTag=<?= key($object) ?>">
+                                            <td class="lg:p-2 lg:px-12 flex justify-end lg:w-16">
+                                                <a class="delete" href="/?Controller=text&method=destroyText&textTag=<?= key($object) ?>">
                                                     <i class="fa fa-trash" style="font-size:36px"></i>
                                                 </a>
                                             </td>
@@ -108,7 +108,7 @@
                         echo "bg-sky-500/50";
                     }
                     ?>
-                    m-2" href="/?Controller=AdminText&method=getAll&page=<?= $i ?>"><?= $i ?></a>
+                    m-2" href="/?Controller=front&method=getAll&page=<?= $i ?>"><?= $i ?></a>
                 <?php
                 }
                 ?>

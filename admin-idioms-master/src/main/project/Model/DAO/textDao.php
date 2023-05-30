@@ -5,9 +5,14 @@ include_once("./src/main/project/Model/objects/text.php");
 
 class textDAO
 {
-    
+    /**
+     * Numero de paginas
+     */
     private $numPage = 10;
 
+    /**
+     * Retorna la etiqueta por su $tag en forma de array
+     */
     public function getTextByTag($tag, $conn)
     {
         $sql = "SELECT * FROM texts where texts.tag like ?";
@@ -20,6 +25,9 @@ class textDAO
         return $result;
     }
 
+    /**
+     * Retorna el numero total de etiquetas en la base de datos
+     */
     public function getCountTotalText($conn){
         $sqlCount = "SELECT COUNT(id) FROM texts";
         $stmtCount = $conn->prepare($sqlCount);
@@ -30,7 +38,9 @@ class textDAO
         return $total_paginas;
     }
 
-
+    /**
+     * Obtenemos las etiquetas de la pagina de Landing
+     */
     public function getLandingTags($conn){
         $sql = "SELECT * FROM texts where texts.tag like '%landing%'";
         $stmt = $conn->prepare($sql);
@@ -41,7 +51,7 @@ class textDAO
     }
 
     /**
-     * Conseguir todos todo todito de la base de datos, FALTA PAGINACION
+     * Obtenemos todas las etiquetas paginadas
      */
     public function getAll($conn, $actualPage = 1){
         $indice_inicio = ($actualPage - 1) * $this->numPage;
@@ -65,10 +75,13 @@ class textDAO
         return $arrayResults;
     }
 
-    public function getAllDepracted($conn, $actualPage = 1)
+    /**
+     * Obtenemos todas las etiquetas sin paginacion
+     */
+    public function getAllWitOutPage($conn)
     {
-        $indice_inicio = ($actualPage - 1) * $this->numPage;
-        $sql = "SELECT texts.id as 'id', texts.tag as 'tag', texts.active as 'active' , lang_text.body as 'body', lang.tag as 'lang' , lang_text.id as 'idtextLang' from (texts inner JOIN lang_text on texts.tag = lang_text.textId) inner join lang on lang.tag = lang_text.langTag";
+        //$sql = "SELECT texts.id as 'id', texts.tag as 'tag', texts.active as 'active' , lang_text.body as 'body', lang.tag as 'lang' , lang_text.id as 'idtextLang' from (texts inner JOIN lang_text on texts.tag = lang_text.textId) inner join lang on lang.tag = lang_text.langTag";
+        $sql = "SELECT * FROM texts";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -80,9 +93,6 @@ class textDAO
                     "id" => $row['id'],
                     "tag" => $row['tag'],
                     "active" => $row['active'],
-                    "lang" => $row['lang'],
-                    "body" => $row['body'],
-                    "idtextLang" => $row['idtextLang'],
                 );
                 array_push($arrayResults, $array);
             }
