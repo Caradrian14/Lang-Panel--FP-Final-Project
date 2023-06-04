@@ -14,6 +14,11 @@
                     Ver Idiomas
                 </li>
             </a>
+            <a href="/?Controller=front&method=goLanding">
+                <li class="border-2 border-white bg-teal-500 px-12 hover:bg-teal-900 hover:text-white ease-in duration-300">
+                    Ver Pagina
+                </li>
+            </a>
         </ul>
     </nav>
 </aside>

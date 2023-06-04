@@ -64,13 +64,13 @@
                                     <div class="lg:min-w-full divide-y divide-gray-200">
                                         <table class="table-auto lgmx-20 text-center">
                                             <tr>
-                                                <td class="p-2 px-12 flex justify-start w-48">
+                                                <td class="p-2 px-12 flex justify-start w-56">
                                                     <?= $elements['textId'] ?>
                                                 </td>
-                                                <td class="p-2 px-12 w-48">
+                                                <td class="p-2 px-12 w-56">
                                                     <?= $elements['langTag'] ?>
                                                 </td>
-                                                <td class="p-2 px-12 w-48">
+                                                <td class="p-2 px-12 w-56">
                                                     <?= $elements['body'] ?>
                                                 </td>
                                             </tr>

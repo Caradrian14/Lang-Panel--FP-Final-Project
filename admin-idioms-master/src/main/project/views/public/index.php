@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
-    <script src="src/main/resources/js/publicScript.js" async></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+    <script src="src/main/resources/js/publicScript.js" async></script> -->
     <link rel="stylesheet" href="src/main/resources/css/publicStyle.css">
     <title>Chocolutia</title>
 </head>
@@ -209,6 +209,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="src/main/resources/js/publicScript.js"></script>
 </body>
 
 </html>
